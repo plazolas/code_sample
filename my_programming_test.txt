@@ -339,14 +339,6 @@ Write a web page that functions as a simple calculator.
 	<title>jQuery Calculator Example</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
-<!--  OSWALD PLAZOLA: ADDED enhancements 12/21/2016:
-          1.- fixes problem when clicking action buttons (+,-,/,x) more than once.
-          2.- Allows floats results from previous computation to be used on next calculations.
-
-          TODO: Add decimal point.
-
-          NOTE: inline CSS and JS intentional!		  
- -->
 <body>
 <section>
 <h2 align="center">jQuery Calculator Example</h2>
@@ -383,7 +375,7 @@ Write a web page that functions as a simple calculator.
 </div>
 </section>
 <footer class="container">
-		<a href="other/Creating-A-Simple-Calculator-with-jQuery.html">A Simple Calculator by Watandeep Sekhon</a>
+		<p>Simple Calculator</p>
 </footer>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -404,22 +396,22 @@ $(document).ready(function(){
 			};
 		},
 		add: function(){
-			//this.runningTotal = parseInt(this.runningTotal) + parseInt(this.currentVal);    /****  Oswald: permits previous floats result to use floats  **/
+			//this.runningTotal = parseInt(this.runningTotal) + parseInt(this.currentVal);    
 			this.runningTotal = this.runningTotal + parseInt(this.currentVal);
 		},
 		subtract: function() {
-			//this.runningTotal = parseInt(this.runningTotal) - parseInt(this.currentVal);     /****  Oswald: permits previous floats result to use floats  **/
+			//this.runningTotal = parseInt(this.runningTotal) - parseInt(this.currentVal);    
 			this.runningTotal = this.runningTotal - parseInt(this.currentVal);
 		},	
 		multiply: function(){
-			//this.runningTotal = parseInt(this.runningTotal) * parseInt(this.currentVal);     /****  Oswald: permits previous floats result to use floats  **/
+			//this.runningTotal = parseInt(this.runningTotal) * parseInt(this.currentVal);     
 			this.runningTotal = this.runningTotal * parseInt(this.currentVal);
 		},
 		divide: function(){
-			/***** Oswald: prevents division by 0 showing NaN or Infinity ****/
+			
 			if(parseInt(this.currentVal) == 0){ alert("Cannot divide by zero"); return false; }
-			/*****************************************************************/
-			///this.runningTotal = parseInt(this.runningTotal) / parseInt(this.currentVal);     /****  Oswald: permits previous floats result to use floats  **/
+			
+			///this.runningTotal = parseInt(this.runningTotal) / parseInt(this.currentVal);     
 			this.runningTotal = this.runningTotal / parseInt(this.currentVal);
 		},
 		clear: function(){
