@@ -1,0 +1,629 @@
+FWT Programmer's Test
+=====================
+
+
+HTML/CSS
+--------
+
+1. Tell us how well you think you know HTML and CSS.
+
+I feel I am at expert level.
+
+2. Given the following HTML, write a CSS style to place the second div to the right of the first div:
+
+<html>
+<head>
+<style>
+#firstDiv {
+  display: inline-block;
+}
+#secondDiv {
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+	<div>
+	<div id = 'firstDiv'>
+		First div
+	</div>
+	<div id = 'secondDiv'>
+		Second div
+	</div>
+	</div> <!-- there was a missing / before div -->
+</body>
+</html>
+
+
+Javascript/jQuery
+-----------------
+
+1. Tell us how well you think you know Javascript and jQuery.
+
+I think I am at expert level.
+
+
+2. Answer the following:
+	What is an object in Javascript? 
+	
+			- A collection of properties and methods according to the object's prototype or runtime definition.
+
+	What is a property?
+	
+			- A key value pair association of an object which can also be a function (method).
+
+	What is a function?
+	
+			- A set of statements that performs a task or calculates a value.
+
+	What is a closure?
+	
+			- A closure is a special kind of object that combines two things: a function, and the environment in which that function was created.
+
+	What is the main difference between objects in Javascript and other languages?
+	
+			- Propeties and methods can be changed (added/deleted) at runtime by changing their protopyte.
+
+	What is AJAX?
+
+			-  Asynchronous JavaScript and XML used with XHTML for content along with Document Object Model and JavaScript for dynamic content display. Independent of web server software.
+
+	What is jQuery?
+	
+			- A fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development.
+
+
+3. Given the HTML above, write a javascript function using jQuery to swap the text "First div" and "Second div".
+
+<script>
+            $(document).ready(function () {
+                  var div2Str = $('#secondDiv').html();
+                  $('#secondDiv').html($('#firstDiv').html());
+                  $('#firstDiv').html(div2Str);
+            });
+            
+</script>
+
+	
+PHP
+---
+
+1. Tell us how well you think you know PHP.
+
+Expert level.
+
+2. Write a PHP function that will reverse the words in a string *without* using arrays.  For example, the string
+"I am  a man" should be returned as "man a  am I".
+
+function reverse_words($str) {
+  if($str == '' || strlen($str) == 0) {
+     return '';
+  }
+  return implode(array_reverse(explode(' ',$str)),' ');
+}
+
+3. Write a PHP code snippet that demonstrates the use of try/catch when opening a database connection.
+
+try {
+     $connection = new mysqli('localhost', 'user', 'password', 'db') ;
+} catch (Exception $e ) {
+     echo "Service unavailable";
+	 if ( $environment == 'developoment') {
+			echo "Unable to connect to database. Message: " . $e->message;
+	 }
+     error_log("Unable to connect to database. Message: " . $e->message;	 
+    exit;
+}
+
+
+4. Describe the lifecycle of an object in PHP.
+
+It will be destructed (unloaded from memory) at the end of the page load (end of script) unless you unset the said object and all references to it before that.
+	
+MySQL
+-----
+
+1. Tell us how well you think you know SQL.
+
+Expert Knowledge.
+
+2. Have you used MySQL and have you written SQL for it?
+
+YES
+
+3. Write a MySQL function to take in an ID and return a formatted name string from this table:
+
+	CustomerName Table:
+	
+	ID	Salutation	First	MI	Last			Title
+	1	Mr.			Joe		D	Jones
+	2	Dr.			Kathy		Steinberger		Chairwoman
+	3				Anita	R	Gonzalez		Owner
+	4	Mrs.					De Laurien		
+	
+	For example, giving the function ID 3 should return "Anita R. Gonzalez".
+	
+DELIMITER $$
+CREATE FUNCTION get_long_name(id INT)
+  RETURNS TEXT
+  LANGUAGE SQL
+BEGIN
+DECLARE out_str TEXT;
+  SELECT CONCAT(first,' ', middle, '. ', last) INTO out_str
+    FROM FROM CustomerName
+    WHERE ID = id;
+  RETURN out_sr;
+END;
+$$
+		
+4. Given this table definition:
+
+	create table `RRScore` ( 
+		`ID` int ( 11 ) not null auto_increment,
+		`DateAdded` timestamp not null default '2000-01-01 00:00:00',
+		`DateChanged` timestamp not null default current_timestamp on update current_timestamp,
+		`CustomerNumber` int default 0,
+		`Answer` int default 0,						 
+		primary key (`ID`),
+		unique key `ID_UNIQUE` (`ID`)
+	)
+
+  And this query:
+	
+	select
+		Answer
+	from RRScore
+	where CustomerNumber = 23
+	
+  How would you optimize either the table or the query?
+  
+  1.- Create a indexes on columns CustomerNumber and DateChanged.
+  2.- Append to query:
+  
+       ORDER BY DateChanged DESC LIMIT 1
+	   
+  3.- InnoDB would be a good storage engine for this table.
+		
+Linux
+-----
+
+1. Tell us how well you think you know Linux and shell scripting.
+
+Very well.
+
+2. Have you ever been the System Administrator for a Linux server?
+
+Not entirely although I've had Help Desk and some sysadmin responsabilities.
+
+3. Write a small bash script to take in a name and print out "Hello <name>, its <current time> right now".
+  
+  #!/usr/bin/env bash
+  echo "Hello $1, its $(date) right now."
+  
+Java
+----
+
+1. Tell us how well you think you know Java.
+
+Novice.
+
+2. What is the difference between Java and Javascript?
+
+Java is a programming language that needs to be compiled while JavaScript is a scripting language that only runs on browsers.
+
+3. Find and fix the error below:
+
+	String aStr	= new String("Mark");
+	String bStr	= new String("Joe");
+		
+	if ( aStr.equals(bStr) ) {
+	    String outStr = String.format("%s is equal to %s", aStr, bStr);
+        System.out.println(outStr); 
+	}
+	
+4. Write an object to hold the data in a record from the CustomerName table in the MySQL section above.  Make sure it has all the
+properties and methods necessary to take in a record and return it.  For extra points, add code to add, edit and delete the record 
+in a database.
+
+public class CustomerName {
+      
+    private Connection conn = NULL;
+    private Statement st = NULL;
+    private ResultSet rs = {};	
+    private int ID;
+    public String Salutation;
+	public String First;
+	public String MI;
+	public String Last;
+	public String Title;
+ 
+    //  constructor
+    public CustomerName(int id) {
+	
+	    if (conn == NULL) {
+	       String myDriver = "org.gjt.mm.mysql.Driver";
+           String myUrl = "jdbc:mysql://localhost/test";
+           Class.forName(myDriver);
+           conn = DriverManager.getConnection(myUrl, "root", "");
+		}
+		
+		String query = "SELECT * FROM CustomerName WHERE ID = "+id;
+		st = conn.createStatement();
+	    rs = st.executeQuery(query);
+		
+		ID = id;
+		
+		Salutation = rs.getString("Salutaion");
+        First = rs.getString("First");
+		MI = rs.getString("MI");
+		Last = rs.getString("Last");
+		Title = rs.getString("Title");
+		
+    }
+        
+    //  methods
+	public boolean updateCustomerName() {	
+	try {
+	        String updt_query = String.format("UPDATE CustomerName SET Salutation = %s, First = %s, MI = s%, Last = %s, Title = %s WHERE ID = %d",Salutaion,First,MI,Last,Title,id);
+		    st = conn.createStatement();
+	        rs = st.executeQuery(updt_query);
+			st.close();
+			return true;
+		 }
+         catch (Exception e)
+         {
+             System.err.println("Got an exception! ");
+             System.err.println(e.getMessage);
+			 return false;
+         }		 
+	}
+	public boolean deleteCustomerName() {	     
+		 try {
+	        String delete_query = String.format("DELETE FROM CustomerName WHERE ID =  %d",ID);
+		    st = conn.createStatement();
+	        rs = st.executeUpdate(delete_query);
+			st.close();
+			return true;
+		 }
+         catch (Exception e)
+         {
+             System.err.println("Got an exception! ");
+             System.err.println(e.getMessage);
+			 return false;
+         }		 
+	}
+    public int insertCustomerName() {	     
+		 try {
+	        String insert_query = String.format("INSERT INTO CustomerName (ID,Salutation,First,MI,Last,Title) VALUES (0,%s,%s,%s,%s,%s) ",Salutaion,First,MI,Last,Title);
+		    st = conn.createStatement();
+	        newid = st.executeUpdate(insert_query);
+			st.close();
+			return newid;
+		 }
+         catch (Exception e)
+         {
+             System.err.println("Got an exception! ");
+             System.err.println(e.getMessage);
+			 return 0;
+         }		 
+	}        	
+}
+	
+
+ModX
+----
+
+1. Have you ever used the ModX content management system?
+
+YES, I am very familiar with ModX.
+
+2. What makes ModX different from WordPress and other CMS systems?
+
+Wordpress is built on a PHP framework and that is highly complex relying on plugins to add funtionallity. ModX, on the other hand,
+is built from the ground up with a full-featured template system and powerful add-on architecture.
+
+3. What is a chunk, a snippet and a template in ModX?
+
+A chunk is a static piece of code or block that may have input variables injected into it and can call php snippets.
+A snippet is a piece of PHP source code that accepts input parameteres and usually output html pieces of code.
+A template is a HTML layout with place holders for a page/document(s).
+
+Programming Exercise
+--------------------
+
+Write a web page that functions as a simple calculator.
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Calculator Example</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<!--  OSWALD PLAZOLA: ADDED enhancements 12/21/2016:
+          1.- fixes problem when clicking action buttons (+,-,/,x) more than once.
+          2.- Allows floats results from previous computation to be used on next calculations.
+
+          TODO: Add decimal point.
+
+          NOTE: inline CSS and JS intentional!		  
+ -->
+<body>
+<section>
+<h2 align="center">jQuery Calculator Example</h2>
+<div class="container">
+    <div class="row">	
+		<div class="calculator">
+			<input type="text" readonly>
+			<div class="row">
+				<div class="key">1</div>
+				<div class="key">2</div>
+				<div class="key">3</div>
+				<div class="key last">0</div>
+			</div>
+			<div class="row">
+				<div class="key">4</div>
+				<div class="key">5</div>
+				<div class="key">6</div>
+				<div class="key last action instant">cl</div>
+			</div>
+			<div class="row">
+				<div class="key">7</div>
+				<div class="key">8</div>
+				<div class="key">9</div>
+				<div class="key last action instant">=</div>
+			</div>
+			<div class="row">
+				<div class="key action">+</div>
+				<div class="key action">-</div>
+				<div class="key action">x</div>
+				<div class="key last action">/</div>
+			</div>
+	  </div>
+	</div>
+</div>
+</section>
+<footer class="container">
+		<a href="other/Creating-A-Simple-Calculator-with-jQuery.html">A Simple Calculator by Watandeep Sekhon</a>
+</footer>
+<script type="text/javascript">
+$(document).ready(function(){
+	var Calculator = {
+		runningTotal : '',	
+		currentVal : '',
+		setCurrentVal: false,
+		executeAction: '',
+		display: '',
+		adjustTotals: function(val){
+			if (!this.setCurrentVal) {
+				//If this is the first number user has entered then it becomes runningTotal
+				//Otherwise it becomes currentVal which will then be used to update runningTotal based on the action picked
+				this.runningTotal += val;
+			} else {
+				//val is a string so we can append to currentVal for multiple digits
+				this.currentVal += val;
+			};
+		},
+		add: function(){
+			//this.runningTotal = parseInt(this.runningTotal) + parseInt(this.currentVal);    /****  Oswald: permits previous floats result to use floats  **/
+			this.runningTotal = this.runningTotal + parseInt(this.currentVal);
+		},
+		subtract: function() {
+			//this.runningTotal = parseInt(this.runningTotal) - parseInt(this.currentVal);     /****  Oswald: permits previous floats result to use floats  **/
+			this.runningTotal = this.runningTotal - parseInt(this.currentVal);
+		},	
+		multiply: function(){
+			//this.runningTotal = parseInt(this.runningTotal) * parseInt(this.currentVal);     /****  Oswald: permits previous floats result to use floats  **/
+			this.runningTotal = this.runningTotal * parseInt(this.currentVal);
+		},
+		divide: function(){
+			/***** Oswald: prevents division by 0 showing NaN or Infinity ****/
+			if(parseInt(this.currentVal) == 0){ alert("Cannot divide by zero"); return false; }
+			/*****************************************************************/
+			///this.runningTotal = parseInt(this.runningTotal) / parseInt(this.currentVal);     /****  Oswald: permits previous floats result to use floats  **/
+			this.runningTotal = this.runningTotal / parseInt(this.currentVal);
+		},
+		clear: function(){
+			this.runningTotal = '';
+			this.currentVal = '';
+			this.executeAction = '';
+			this.setCurrentVal = false;
+			this.display = '';
+		},
+		resetCurrentVal: function (){
+			this.currentVal = '';
+		},
+		calculate: function(){
+			this.executeAction = '';
+			this.currentVal = '';
+			return this.runningTotal;
+		},
+		getAction: function(val){
+			 var method = '';
+			switch (val) {
+				case '+': 
+					method = Calculator.add;
+					break;
+				case '-':
+					method = Calculator.subtract;
+					break;
+				case 'x':
+					method = Calculator.multiply;
+					break;
+				case '/':
+					method = Calculator.divide;
+					break;
+			}
+
+			return method;
+		},
+		setDisplay: function(){
+			if(typeof(this.runningTotal) === NaN) {this.runningTotal = 0} 
+			return this.display = this.currentVal == '' ? this.runningTotal : this.currentVal;
+		}
+	};
+
+	
+	var onButtonPress = function (){
+		var obj = $(this),
+			action = obj.hasClass('action'),
+			instant = obj.hasClass('instant'),
+			val = obj.text();
+		if (!action) {
+			//No action means the button pressed is a number not an "action"
+			Calculator.adjustTotals(val);
+		} else if(!instant) { 
+			//A action button was pressed. Store the action so it can be executed lator
+			if (Calculator.executeAction != ''){
+				Calculator.executeAction();
+			};
+
+			Calculator.executeAction = Calculator.getAction(val);
+			Calculator.setCurrentVal = true;
+			Calculator.resetCurrentVal();
+		} else {
+			//Either = or Clr is clicked. this needs immediate action.
+			if (Calculator.executeAction != ''){
+				Calculator.executeAction();
+			};
+
+			switch (val){
+				case 'cl': 
+					method = Calculator.clear();
+					break;
+				case '=':
+					method = Calculator.calculate();
+					break;
+			}
+		}
+
+		Calculator.setDisplay();
+	}
+
+	var refreshVal = function(){
+		$('.calculator input[type=text]').val(Calculator.display);
+	}
+	
+	var prev_key = "&";
+	var key_arr = ['+','-','x','/'];
+
+
+	$('div.key').click(function(){
+		//We want this to stay as div.keyin the onButtonPress function
+		
+		var current_key = $(this).text();
+		if($.inArray(current_key, key_arr) != -1) { 
+		    if($.inArray(prev_key, key_arr) != -1) {
+				prev_key = current_key;
+				return false;
+			}
+		}
+		prev_key = current_key;
+		
+		onButtonPress.call(this);
+		refreshVal();
+	});
+});
+</script>
+<style>
+/*
+==================================
+			GRID
+==================================
+*/
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+*:before, *:after {
+	display: table-cell;
+	content: '';
+}
+
+*:after{
+	clear: both;
+}
+
+body{ 
+	font-family: helvetica, arial, sans-serif;
+}
+
+.container {
+	margin: 0 auto;
+	width: 350px;
+}
+
+.calculator {
+	padding: 10px;
+	margin-top: 20px;
+	background-color: #ccc;
+	border-radius: 5px;
+	/*this is to remove space between divs that are inline-block*/
+	font-size: 0;
+}
+
+.calculator > input[type=text] {
+	width: 100%;	
+	height: 50px;	
+	border: none;
+	background-color: #eee;	
+	text-align: right;
+	font-size: 30px;
+	padding-right: 10px;
+}
+
+.calculator .row { 
+	margin-top: 10px;
+}
+
+.calculator .key {
+	width: 78.7px;
+	display: inline-block;
+	background-color: black;
+	color: white;
+	font-size: 1rem;
+	margin-right: 5px;
+	border-radius: 5px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+.calculator .key:hover{
+	cursor: pointer;
+	background-color: #999
+}
+
+.key.last{
+	margin-right: 0px;
+} 
+
+.key.action {
+	background-color: #646060;
+}
+
+footer {
+	font-style: italic;
+	padding-top: 35px;
+	text-align: center;
+	font-size: 10px;
+}
+/*
+==================================
+			TYPOGRAPHY
+==================================
+*/
+h1, h3, h4, h5, p {
+	margin-bottom: 22px;
+}
+
+</style>
+</body>
+</html>
+
+
+  
