@@ -30,7 +30,7 @@ I feel I am at expert level.
 	<div id = 'secondDiv'>
 		Second div
 	</div>
-	</div> <!-- there was a missing / before div -->
+	</div>
 </body>
 </html>
 
